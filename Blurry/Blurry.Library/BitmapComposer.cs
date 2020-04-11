@@ -3,7 +3,6 @@ using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Widget;
-using Blurry.Library.@internal;
 
 namespace Blurry.Library
 {
@@ -48,8 +47,7 @@ namespace Blurry.Library
             }
             else
             {
-                Drawable drawable = new BitmapDrawable(_context.Resources,
-                    Blur.Of(target.Context, _bitmap, _factor));
+                Drawable drawable = new BitmapDrawable(_context.Resources, Blur.Of(target.Context, _bitmap, _factor));
                 target.SetImageDrawable(drawable);
             }
         }

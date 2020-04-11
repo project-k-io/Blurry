@@ -3,7 +3,6 @@ using Android.Content;
 using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Views;
-using Blurry.Library.@internal;
 
 namespace Blurry.Library
 {
@@ -14,8 +13,8 @@ namespace Blurry.Library
         private readonly View _blurredView;
         private readonly Context _context;
         private readonly BlurFactor _factor;
-        private bool _async;
-        private bool _animate;
+        private bool _isAsync;
+        private bool _isAnimate;
         private int _duration = 300;
         private Action<BitmapDrawable> _onImageReady;
 
@@ -47,38 +46,38 @@ namespace Blurry.Library
 
         public Composer Async()
         {
-            _async = true;
+            _isAsync = true;
             return this;
         }
 
         public Composer Async(Action<BitmapDrawable> listener)
         {
-            _async = true;
+            _isAsync = true;
             _onImageReady = listener;
             return this;
         }
 
         public Composer Animate()
         {
-            _animate = true;
+            _isAnimate = true;
             return this;
         }
 
         public Composer Animate(int duration)
         {
-            _animate = true;
+            _isAnimate = true;
             _duration = duration;
             return this;
         }
 
         public ImageComposer Capture(View capture)
         {
-            return new ImageComposer(_context, capture, _factor, _async, _onImageReady);
+            return new ImageComposer(_context, capture, _factor, _isAsync, _onImageReady);
         }
 
         public BitmapComposer From(Bitmap bitmap)
         {
-            return new BitmapComposer(_context, bitmap, _factor, _async, _onImageReady);
+            return new BitmapComposer(_context, bitmap, _factor, _isAsync, _onImageReady);
         }
 
         public void Onto(ViewGroup target)
@@ -86,15 +85,12 @@ namespace Blurry.Library
             _factor.Width = target.MeasuredWidth;
             _factor.Height = target.MeasuredHeight;
 
-            if (_async)
+            if (_isAsync)
             {
                 var task = new BlurTask(target, _factor, (drawable) =>
                 {
                     AddView(target, drawable);
-                    if (_onImageReady != null)
-                    {
-                        _onImageReady(drawable);
-                    }
+                    _onImageReady?.Invoke(drawable);
                 });
 
                 task.Execute();
@@ -111,7 +107,7 @@ namespace Blurry.Library
             Helper.SetBackground(_blurredView, drawable);
             target.AddView(_blurredView);
 
-            if (_animate)
+            if (_isAnimate)
             {
                 Helper.Animate(_blurredView, _duration);
             }

@@ -3,7 +3,6 @@ using Android.Content;
 using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
-using Blurry.Library.@internal;
 
 namespace Blurry.Library
 {

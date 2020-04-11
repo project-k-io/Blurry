@@ -24,7 +24,7 @@ namespace Blurry.Sample
             FindViewById<View>(Resource.Id.button).Click += (s, e) =>
             {
                 // var startMs = System.CurrentTimeMillis
-                Blurry2.With(this)
+                BlurryHelper.With(this)
                     .Radius(25)
                     .Sampling(1)
                     .Color(Color.Argb(66, 0, 255, 255))
@@ -32,14 +32,14 @@ namespace Blurry.Sample
                     .Capture(FindViewById(Resource.Id.right_top))
                     .Into(FindViewById<ImageView>(Resource.Id.right_top));
 
-                Blurry2.With(this)
+                BlurryHelper.With(this)
                     .Radius(10)
                     .Sampling(8)
                     .Async()
                     .Capture(FindViewById(Resource.Id.right_bottom))
                     .Into(FindViewById<ImageView>(Resource.Id.right_bottom));
 
-                Blurry2.With(this)
+                BlurryHelper.With(this)
                     .Radius(25)
                     .Sampling(1)
                     .Color(Color.Argb(66, 255, 255, 0))
@@ -56,12 +56,12 @@ namespace Blurry.Sample
             {
                 if (blurred)
                 {
-                    Blurry2.Delete(FindViewById<ViewGroup>(Resource.Id.content));
+                    BlurryHelper.Delete(FindViewById<ViewGroup>(Resource.Id.content));
                 }
                 else
                 {
                     var startMs = JavaSystem.CurrentTimeMillis();
-                    Blurry2.With(this)
+                    BlurryHelper.With(this)
                         .Radius(25)
                         .Sampling(2)
                         .Async()

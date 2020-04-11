@@ -51,10 +51,10 @@
     <Compile Include="Blurry.cs" />
     <Compile Include="Composer.cs" />
     <Compile Include="ImageComposer.cs" />
-    <Compile Include="internal\Blur.cs" />
-    <Compile Include="internal\BlurFactor.cs" />
-    <Compile Include="internal\BlurTask.cs" />
-    <Compile Include="internal\Helper.cs" />
+    <Compile Include="Blur.cs" />
+    <Compile Include="BlurFactor.cs" />
+    <Compile Include="BlurTask.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
