@@ -7,7 +7,7 @@ using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Views;
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
     public class BlurTask
     {

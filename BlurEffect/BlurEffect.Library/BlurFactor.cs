@@ -1,6 +1,6 @@
 using Android.Graphics;
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
     public class BlurFactor
     {

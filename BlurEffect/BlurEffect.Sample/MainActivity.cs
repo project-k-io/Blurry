@@ -7,11 +7,11 @@ using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Blurry.Library;
+using BlurEffect.Library;
 using Java.Lang;
 using Xamarin.Essentials;
 
-namespace Blurry.Sample
+namespace BlurEffect.Sample
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
@@ -26,7 +26,7 @@ namespace Blurry.Sample
             FindViewById<View>(Resource.Id.button).Click += (s, e) =>
             {
                 // var startMs = System.CurrentTimeMillis
-                BlurryHelper.With(this)
+                Blurry.With(this)
                     .Radius(25)
                     .Sampling(1)
                     .Color(Color.Argb(66, 0, 255, 255))
@@ -34,14 +34,14 @@ namespace Blurry.Sample
                     .Capture(FindViewById(Resource.Id.right_top))
                     .Into(FindViewById<ImageView>(Resource.Id.right_top));
 
-                BlurryHelper.With(this)
+                Blurry.With(this)
                     .Radius(10)
                     .Sampling(8)
                     .Async()
                     .Capture(FindViewById(Resource.Id.right_bottom))
                     .Into(FindViewById<ImageView>(Resource.Id.right_bottom));
 
-                BlurryHelper.With(this)
+                Blurry.With(this)
                     .Radius(25)
                     .Sampling(1)
                     .Color(Color.Argb(66, 255, 255, 0))
@@ -58,12 +58,12 @@ namespace Blurry.Sample
             {
                 if (blurred)
                 {
-                    BlurryHelper.Delete(FindViewById<ViewGroup>(Resource.Id.content));
+                    Blurry.Delete(FindViewById<ViewGroup>(Resource.Id.content));
                 }
                 else
                 {
                     var startMs = JavaSystem.CurrentTimeMillis();
-                    BlurryHelper.With(this)
+                    Blurry.With(this)
                         .Radius(25)
                         .Sampling(2)
                         .Async()

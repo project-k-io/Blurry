@@ -4,7 +4,7 @@ using Android.Graphics.Drawables;
 using Android.Views;
 using Android.Widget;
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
     public class ImageComposer
     {

@@ -6,7 +6,7 @@ using Android.OS;
 using Android.Renderscripts;
 using Android.Views;
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
     public class Blur
     {

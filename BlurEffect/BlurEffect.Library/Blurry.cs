@@ -1,11 +1,11 @@
 using Android.Content;
 using Android.Views;
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
-    public class BlurryHelper
+    public class Blurry
     {
-        private static readonly string Tag = typeof(BlurryHelper).Name;
+        private static readonly string Tag = typeof(Blurry).Name;
 
         public static Composer With(Context context)
         {

@@ -3,7 +3,7 @@ using Android.OS;
 using Android.Views;
 using Android.Views.Animations;
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
     public class Helper
     {

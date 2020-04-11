@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Blurry.Library.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("BlurEffect.Library.Resource", IsApplication=false)]
 
-namespace Blurry.Library
+namespace BlurEffect.Library
 {
 	
 	

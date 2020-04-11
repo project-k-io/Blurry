@@ -10,8 +10,8 @@
     <TemplateGuid>{9ef11e43-1701-4396-8835-8392d57abb70}</TemplateGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Blurry.Library</RootNamespace>
-    <AssemblyName>Blurry.Library</AssemblyName>
+    <RootNamespace>BlurEffect.Library</RootNamespace>
+    <AssemblyName>BlurEffect.Library</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <Deterministic>True</Deterministic>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>

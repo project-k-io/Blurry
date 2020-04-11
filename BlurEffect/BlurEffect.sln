@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30002.166
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blurry.Library", "Blurry.Library\Blurry.Library.csproj", "{2DFC8AC5-76C3-4949-8CA8-DA7B4A762F92}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlurEffect.Library", "BlurEffect.Library\BlurEffect.Library.csproj", "{2DFC8AC5-76C3-4949-8CA8-DA7B4A762F92}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blurry.Sample", "Blurry.Sample\Blurry.Sample.csproj", "{B3BE1AD2-0376-4168-82EF-1F906F687249}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlurEffect.Sample", "BlurEffect.Sample\BlurEffect.Sample.csproj", "{B3BE1AD2-0376-4168-82EF-1F906F687249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
