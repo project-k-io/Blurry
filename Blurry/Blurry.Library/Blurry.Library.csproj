@@ -51,7 +51,6 @@
     <Compile Include="Blurry.cs" />
     <Compile Include="Composer.cs" />
     <Compile Include="ImageComposer.cs" />
-    <Compile Include="IImageComposerListener.cs" />
     <Compile Include="internal\Blur.cs" />
     <Compile Include="internal\BlurFactor.cs" />
     <Compile Include="internal\BlurTask.cs" />

@@ -15,9 +15,10 @@
 
 using Android.Content;
 using Android.Views;
-using Blurry.Library;
 
-/**
+namespace Blurry.Library
+{
+    /**
  * Copyright (C) 2018 Wasabeef
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,18 +34,23 @@ using Blurry.Library;
  * limitations under the License.
  */
 
-public class Blurry2 {
+    public class Blurry2
+    {
 
-  private static readonly string Tag =   typeof(Blurry2).Name;
+        private static readonly string Tag = typeof(Blurry2).Name;
 
-  public static Composer With2(Context context) {
-    return new Composer(context);
-  }
+        public static Composer With(Context context)
+        {
+            return new Composer(context);
+        }
 
-  public static void Delete(ViewGroup target) {
-    View view = target.FindViewWithTag(Tag);
-    if (view != null) {
-      target.RemoveView(view);
+        public static void Delete(ViewGroup target)
+        {
+            var view = target.FindViewWithTag(Tag);
+            if (view != null)
+            {
+                target.RemoveView(view);
+            }
+        }
     }
-  }
 }
