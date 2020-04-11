@@ -11,11 +11,11 @@ namespace Blurry.Library
 {
     public class BlurTask
     {
-        private readonly Resources _res;
-        private readonly WeakReference<Context> _contextWeakRef;
-        private readonly BlurFactor _factor;
         private readonly Bitmap _bitmap;
         private readonly Action<BitmapDrawable> _callback;
+        private readonly WeakReference<Context> _contextWeakRef;
+        private readonly BlurFactor _factor;
+        private readonly Resources _res;
 
         public BlurTask(View target, BlurFactor factor, Action<BitmapDrawable> callback)
         {
@@ -44,15 +44,12 @@ namespace Blurry.Library
         {
             ThreadPool.QueueUserWorkItem(delegate
             {
-                if (!_contextWeakRef.TryGetTarget(out Context context))
+                if (!_contextWeakRef.TryGetTarget(out var context))
                     return;
 
                 var bitmapDrawable = new BitmapDrawable(_res, Blur.Of(context, _bitmap, _factor));
 
-                if (_callback != null)
-                {
-                    new Handler(Looper.MainLooper).Post(() => { _callback(bitmapDrawable); });
-                }
+                if (_callback != null) new Handler(Looper.MainLooper).Post(() => { _callback(bitmapDrawable); });
             });
         }
     }

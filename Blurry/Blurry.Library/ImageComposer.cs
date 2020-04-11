@@ -8,10 +8,10 @@ namespace Blurry.Library
 {
     public class ImageComposer
     {
-        private readonly Context _context;
-        private readonly View _capture;
-        private readonly BlurFactor _factor;
         private readonly bool _async;
+        private readonly View _capture;
+        private readonly Context _context;
+        private readonly BlurFactor _factor;
         private readonly Action<BitmapDrawable> _imageReady;
 
         public ImageComposer(Context context, View capture, BlurFactor factor, bool async, Action<BitmapDrawable> imageReady)
@@ -30,17 +30,13 @@ namespace Blurry.Library
 
             if (_async)
             {
-                var task = new BlurTask(_capture, _factor, (drawable) =>
+                var task = new BlurTask(_capture, _factor, drawable =>
                 {
                     {
                         if (_imageReady == null)
-                        {
                             target.SetImageDrawable(drawable);
-                        }
                         else
-                        {
                             _imageReady(drawable);
-                        }
                     }
                 });
                 task.Execute();

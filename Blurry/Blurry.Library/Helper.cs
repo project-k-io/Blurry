@@ -5,31 +5,21 @@ using Android.Views.Animations;
 
 namespace Blurry.Library
 {
- 
     public class Helper
     {
-
         public static void SetBackground(View v, Drawable drawable)
         {
             if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBean)
-            {
                 v.Background = drawable;
-            }
             else
-            {
                 v.SetBackgroundDrawable(drawable);
-            }
         }
 
         public static bool HasZero(params int[] args)
         {
             foreach (var num in args)
-            {
                 if (num == 0)
-                {
                     return true;
-                }
-            }
 
             return false;
         }

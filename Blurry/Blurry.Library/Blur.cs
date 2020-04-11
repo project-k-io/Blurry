@@ -7,11 +7,9 @@ using Android.Renderscripts;
 using Android.Views;
 
 namespace Blurry.Library
-{ 
-
+{
     public class Blur
     {
-
         public static Bitmap Of(View view, BlurFactor factor)
         {
             view.DrawingCacheEnabled = true;
@@ -28,10 +26,7 @@ namespace Blurry.Library
             var width = factor.Width / factor.Sampling;
             var height = factor.Height / factor.Sampling;
 
-            if (Helper.HasZero(width, height))
-            {
-                return null;
-            }
+            if (Helper.HasZero(width, height)) return null;
 
             var bitmap = Bitmap.CreateBitmap(width, height, Bitmap.Config.Argb8888);
 
@@ -44,7 +39,6 @@ namespace Blurry.Library
             canvas.DrawBitmap(source, 0, 0, paint);
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.JellyBean)
-            {
                 try
                 {
                     bitmap = Rs(context, bitmap, factor.Radius);
@@ -53,22 +47,14 @@ namespace Blurry.Library
                 {
                     bitmap = Stack(bitmap, factor.Radius, true);
                 }
-            }
             else
-            {
                 bitmap = Stack(bitmap, factor.Radius, true);
-            }
 
-            if (factor.Sampling == BlurFactor.DefaultSampling)
-            {
-                return bitmap;
-            }
-            else
-            {
-                var scaled = Bitmap.CreateScaledBitmap(bitmap, factor.Width, factor.Height, true);
-                bitmap.Recycle();
-                return scaled;
-            }
+            if (factor.Sampling == BlurFactor.DefaultSampling) return bitmap;
+
+            var scaled = Bitmap.CreateScaledBitmap(bitmap, factor.Width, factor.Height, true);
+            bitmap.Recycle();
+            return scaled;
         }
 
         [TargetApi(Value = (int) BuildVersionCodes.JellyBeanMr2)]
@@ -108,7 +94,6 @@ namespace Blurry.Library
 
         private static Bitmap Stack(Bitmap sentBitmap, int radius, bool canReuseInBitmap)
         {
-
             // Stack Blur v1.0 from
             // http://www.quasimondo.com/StackBlurForCanvas/StackBlurDemo.html
             //
@@ -139,21 +124,14 @@ namespace Blurry.Library
 
             Bitmap bitmap;
             if (canReuseInBitmap)
-            {
                 bitmap = sentBitmap;
-            }
             else
-            {
                 bitmap = sentBitmap.Copy(sentBitmap.GetConfig(), true);
-            }
 
-            if (radius < 1)
-            {
-                return (null);
-            }
+            if (radius < 1) return null;
 
-            int w = bitmap.Width;
-            int h = bitmap.Height;
+            var w = bitmap.Width;
+            var h = bitmap.Height;
 
             var pix = new int[w * h];
             bitmap.GetPixels(pix, 0, w, 0, 0, w, h);
@@ -172,10 +150,7 @@ namespace Blurry.Library
             var divsum = (div + 1) >> 1;
             divsum *= divsum;
             var dv = new int[256 * divsum];
-            for (i = 0; i < 256 * divsum; i++)
-            {
-                dv[i] = (i / divsum);
-            }
+            for (i = 0; i < 256 * divsum; i++) dv[i] = i / divsum;
 
             yw = yi = 0;
 
@@ -200,7 +175,7 @@ namespace Blurry.Library
                     sir = stack[i + radius];
                     sir[0] = (p & 0xff0000) >> 16;
                     sir[1] = (p & 0x00ff00) >> 8;
-                    sir[2] = (p & 0x0000ff);
+                    sir[2] = p & 0x0000ff;
                     rbs = r1 - Math.Abs(i);
                     rsum += sir[0] * rbs;
                     gsum += sir[1] * rbs;
@@ -223,7 +198,6 @@ namespace Blurry.Library
 
                 for (x = 0; x < w; x++)
                 {
-
                     r[yi] = dv[rsum];
                     g[yi] = dv[gsum];
                     b[yi] = dv[bsum];
@@ -239,16 +213,13 @@ namespace Blurry.Library
                     goutsum -= sir[1];
                     boutsum -= sir[2];
 
-                    if (y == 0)
-                    {
-                        vmin[x] = Math.Min(x + radius + 1, wm);
-                    }
+                    if (y == 0) vmin[x] = Math.Min(x + radius + 1, wm);
 
                     p = pix[yw + vmin[x]];
 
                     sir[0] = (p & 0xff0000) >> 16;
                     sir[1] = (p & 0x00ff00) >> 8;
-                    sir[2] = (p & 0x0000ff);
+                    sir[2] = p & 0x0000ff;
 
                     rinsum += sir[0];
                     ginsum += sir[1];
@@ -259,7 +230,7 @@ namespace Blurry.Library
                     bsum += binsum;
 
                     stackpointer = (stackpointer + 1) % div;
-                    sir = stack[(stackpointer) % div];
+                    sir = stack[stackpointer % div];
 
                     routsum += sir[0];
                     goutsum += sir[1];
@@ -308,10 +279,7 @@ namespace Blurry.Library
                         boutsum += sir[2];
                     }
 
-                    if (i < hm)
-                    {
-                        yp += w;
-                    }
+                    if (i < hm) yp += w;
                 }
 
                 yi = x;
@@ -319,7 +287,7 @@ namespace Blurry.Library
                 for (y = 0; y < h; y++)
                 {
                     // Preserve alpha channel: ( 0xff000000 & pix[yi] )
-                    pix[yi] = (int)(0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
+                    pix[yi] = (int) (0xff000000 & pix[yi]) | (dv[rsum] << 16) | (dv[gsum] << 8) | dv[bsum];
 
                     rsum -= routsum;
                     gsum -= goutsum;
@@ -332,10 +300,7 @@ namespace Blurry.Library
                     goutsum -= sir[1];
                     boutsum -= sir[2];
 
-                    if (x == 0)
-                    {
-                        vmin[y] = Math.Min(y + r1, hm) * w;
-                    }
+                    if (x == 0) vmin[y] = Math.Min(y + r1, hm) * w;
 
                     p = x + vmin[y];
 
@@ -367,9 +332,7 @@ namespace Blurry.Library
             }
 
             bitmap.SetPixels(pix, 0, w, 0, 0, w, h);
-            return (bitmap);
-
+            return bitmap;
         }
     }
 }
-

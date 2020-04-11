@@ -5,7 +5,6 @@ namespace Blurry.Library
 {
     public class BlurryHelper
     {
-
         private static readonly string Tag = typeof(BlurryHelper).Name;
 
         public static Composer With(Context context)
@@ -16,10 +15,7 @@ namespace Blurry.Library
         public static void Delete(ViewGroup target)
         {
             var view = target.FindViewWithTag(Tag);
-            if (view != null)
-            {
-                target.RemoveView(view);
-            }
+            if (view != null) target.RemoveView(view);
         }
     }
 }

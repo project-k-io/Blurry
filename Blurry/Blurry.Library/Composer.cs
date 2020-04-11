@@ -13,9 +13,9 @@ namespace Blurry.Library
         private readonly View _blurredView;
         private readonly Context _context;
         private readonly BlurFactor _factor;
-        private bool _isAsync;
-        private bool _isAnimate;
         private int _duration = 300;
+        private bool _isAnimate;
+        private bool _isAsync;
         private Action<BitmapDrawable> _onImageReady;
 
         public Composer(Context context)
@@ -87,7 +87,7 @@ namespace Blurry.Library
 
             if (_isAsync)
             {
-                var task = new BlurTask(target, _factor, (drawable) =>
+                var task = new BlurTask(target, _factor, drawable =>
                 {
                     AddView(target, drawable);
                     _onImageReady?.Invoke(drawable);
@@ -107,10 +107,7 @@ namespace Blurry.Library
             Helper.SetBackground(_blurredView, drawable);
             target.AddView(_blurredView);
 
-            if (_isAnimate)
-            {
-                Helper.Animate(_blurredView, _duration);
-            }
+            if (_isAnimate) Helper.Animate(_blurredView, _duration);
         }
     }
 }

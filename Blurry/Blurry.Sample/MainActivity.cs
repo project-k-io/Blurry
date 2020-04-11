@@ -1,13 +1,15 @@
 ﻿using Android.App;
+using Android.Content.PM;
 using Android.Graphics;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Runtime;
+using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using Blurry.Library;
 using Java.Lang;
+using Xamarin.Essentials;
 
 namespace Blurry.Sample
 {
@@ -17,7 +19,7 @@ namespace Blurry.Sample
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
 
@@ -68,7 +70,7 @@ namespace Blurry.Sample
                         .Animate(500)
                         .Onto(FindViewById<ViewGroup>(Resource.Id.content));
                     Log.Debug(GetString(Resource.String.app_name),
-                        "TIME " + (JavaSystem.CurrentTimeMillis() - startMs).ToString() + "ms");
+                        "TIME " + (JavaSystem.CurrentTimeMillis() - startMs) + "ms");
                 }
 
                 blurred = !blurred;
@@ -76,9 +78,9 @@ namespace Blurry.Sample
             };
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
